@@ -8,19 +8,16 @@
 CREATE TABLE RoomType (
     RoomTypeID SERIAL PRIMARY KEY,
     TypeName VARCHAR(50) NOT NULL CHECK (TypeName IN ('Single', 'Double', 'Deluxe', 'Suite')),
-    Description TEXT,
-    MaxOccupancy INTEGER NOT NULL CHECK (MaxOccupancy > 0),
+    Cost DECIMAL(10,2) NOT NULL CHECK (Cost > 0),
+    RoomCapacity INTEGER NOT NULL CHECK (RoomCapacity > 0),
     UNIQUE(TypeName)
 );
 
 -- Create Room table
 CREATE TABLE Room (
     RoomID SERIAL PRIMARY KEY,
-    RoomNumber VARCHAR(10) NOT NULL UNIQUE,
     RoomTypeID INTEGER NOT NULL REFERENCES RoomType(RoomTypeID),
-    Status VARCHAR(20) NOT NULL DEFAULT 'Available' CHECK (Status IN ('Available', 'Occupied', 'Maintenance')),
-    PricePerNight DECIMAL(10,2) NOT NULL CHECK (PricePerNight > 0),
-    Floor INTEGER NOT NULL CHECK (Floor > 0)
+    Status VARCHAR(20) NOT NULL DEFAULT 'Available' CHECK (Status IN ('Available', 'Occupied', 'Maintenance'))
 );
 
 -- Create Customer table
@@ -42,8 +39,7 @@ CREATE TABLE Staff (
     Phone VARCHAR(15) NOT NULL UNIQUE,
     Email VARCHAR(100) UNIQUE,
     Salary DECIMAL(10,2) CHECK (Salary > 0),
-    Shift VARCHAR(20) CHECK (Shift IN ('Morning', 'Evening', 'Night')),
-    HiredDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    JoiningDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Booking table
@@ -67,37 +63,6 @@ CREATE TABLE Payment (
     PaymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PaymentMethod VARCHAR(20) NOT NULL CHECK (PaymentMethod IN ('Cash', 'Card', 'UPI', 'Online')),
     Status VARCHAR(20) NOT NULL DEFAULT 'Pending' CHECK (Status IN ('Pending', 'Completed', 'Failed', 'Refunded'))
-);
-
--- Create Service table
-CREATE TABLE Service (
-    ServiceID SERIAL PRIMARY KEY,
-    ServiceName VARCHAR(100) NOT NULL CHECK (ServiceName IN ('Laundry', 'Spa', 'Food', 'Room Service', 'Gym', 'Pool')),
-    Description TEXT,
-    Charge DECIMAL(10,2) NOT NULL CHECK (Charge >= 0),
-    UNIQUE(ServiceName)
-);
-
--- Create ServiceUsage table
-CREATE TABLE ServiceUsage (
-    UsageID SERIAL PRIMARY KEY,
-    BookingID INTEGER NOT NULL REFERENCES Booking(BookingID),
-    ServiceID INTEGER NOT NULL REFERENCES Service(ServiceID),
-    DateUsed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Quantity INTEGER NOT NULL DEFAULT 1 CHECK (Quantity > 0),
-    TotalCharge DECIMAL(10,2) NOT NULL CHECK (TotalCharge >= 0)
-);
-
--- Create RoomMaintenance table
-CREATE TABLE RoomMaintenance (
-    MaintenanceID SERIAL PRIMARY KEY,
-    RoomID INTEGER NOT NULL REFERENCES Room(RoomID),
-    StaffID INTEGER NOT NULL REFERENCES Staff(StaffID),
-    StartDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    EndDate TIMESTAMP,
-    Remarks TEXT,
-    Status VARCHAR(20) DEFAULT 'In Progress' CHECK (Status IN ('Scheduled', 'In Progress', 'Completed')),
-    CONSTRAINT check_maintenance_dates CHECK (EndDate IS NULL OR EndDate >= StartDate)
 );
 
 -- Show all tables in the database
