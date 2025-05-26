@@ -10,10 +10,10 @@ The database consists of 5 main tables:
 
 | Table | Columns |
 |-------|---------|
-| **RoomType** | ***RoomTypeID*** (PK), TypeName, Cost, RoomCapacity |
-| **Room** | ***RoomID*** (PK), RoomTypeID (FK), Status |
-| **Customer** | ***CustomerID*** (PK), FullName, Phone, Email, Address, IDProof, CreatedAt |
-| **Staff** | ***StaffID*** (PK), FullName, Role, Phone, Email, Salary, JoiningDate |
+| **RoomType** | ***RoomType*** (PK), Cost, RoomCapacity |
+| **Room** | ***RoomID*** (PK), RoomType (FK), Status |
+| **Customer** | ***CustomerID*** (PK), FullName, Phone, Email, Address, IDProof, Gender, CreatedAt |
+| **Staff** | ***StaffID*** (PK), FullName, Role, Phone, Email, Salary, Gender, JoiningDate |
 | **Booking** | ***BookingID*** (PK), CustomerID (FK), RoomID (FK), CheckInDate, CheckOutDate, BookingDate, NumberOfGuests, Status |
 | **Payment** | ***PaymentID*** (PK), BookingID (FK), Amount, PaymentDate, PaymentMethod, Status |
 

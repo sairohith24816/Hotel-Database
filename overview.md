@@ -7,14 +7,13 @@ A complete backend system for managing hotel operations, including customer book
 ## 📑 Entity-Relationship Model
 
 ### 🏷️ RoomType
-- `RoomTypeID` (PK)
-- `TypeName` (Single, Double, Deluxe, Suite)
+- `RoomType` (PK) (Single, Double, Deluxe, Suite)
 - `Cost`
 - `RoomCapacity`
 
 ### 🛏️ Room
 - `RoomID` (PK)
-- `RoomTypeID` (FK to RoomType)
+- `RoomType` (FK to RoomType)
 - `Status` (Available / Occupied / Maintenance)
 
 ### 🧍 Customer
@@ -24,6 +23,7 @@ A complete backend system for managing hotel operations, including customer book
 - `Email`
 - `Address`
 - `IDProof`
+- `Gender`
 - `CreatedAt`
 
 ### 👨‍💼 Staff
@@ -33,6 +33,7 @@ A complete backend system for managing hotel operations, including customer book
 - `Phone`
 - `Email`
 - `Salary`
+- `Gender`
 - `JoiningDate`
 
 ### 📆 Booking

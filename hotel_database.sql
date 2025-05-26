@@ -6,17 +6,15 @@
 -- \c hotel_management;
 -- Create RoomType table first (referenced by Room)
 CREATE TABLE RoomType (
-    RoomTypeID SERIAL PRIMARY KEY,
-    TypeName VARCHAR(50) NOT NULL CHECK (TypeName IN ('Single', 'Double', 'Deluxe', 'Suite')),
+    RoomType VARCHAR(50) PRIMARY KEY CHECK (RoomType IN ('Single', 'Double', 'Deluxe', 'Suite')),
     Cost DECIMAL(10,2) NOT NULL CHECK (Cost > 0),
-    RoomCapacity INTEGER NOT NULL CHECK (RoomCapacity > 0),
-    UNIQUE(TypeName)
+    RoomCapacity INTEGER NOT NULL CHECK (RoomCapacity > 0)
 );
 
 -- Create Room table
 CREATE TABLE Room (
     RoomID SERIAL PRIMARY KEY,
-    RoomTypeID INTEGER NOT NULL REFERENCES RoomType(RoomTypeID),
+    RoomType VARCHAR(50) NOT NULL REFERENCES RoomType(RoomType),
     Status VARCHAR(20) NOT NULL DEFAULT 'Available' CHECK (Status IN ('Available', 'Occupied', 'Maintenance'))
 );
 
@@ -28,6 +26,7 @@ CREATE TABLE Customer (
     Email VARCHAR(100) UNIQUE,
     Address TEXT,
     IDProof VARCHAR(50) NOT NULL,
+    Gender VARCHAR(10) CHECK (Gender IN ('Male', 'Female', 'Other')),
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -39,6 +38,7 @@ CREATE TABLE Staff (
     Phone VARCHAR(15) NOT NULL UNIQUE,
     Email VARCHAR(100) UNIQUE,
     Salary DECIMAL(10,2) CHECK (Salary > 0),
+    Gender VARCHAR(10) CHECK (Gender IN ('Male', 'Female', 'Other')),
     JoiningDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
