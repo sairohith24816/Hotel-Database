@@ -1,0 +1,6 @@
+RoomType,Cost,RoomCapacity
+Presidential,10000,6
+Single,1500,1
+Double,2500,2
+Deluxe,4000,3
+Suite,6000,4
