@@ -6,7 +6,7 @@
 -- \c hotel_management;
 -- Create RoomType table first (referenced by Room)
 CREATE TABLE RoomType (
-    RoomType VARCHAR(50) PRIMARY KEY CHECK (RoomType IN ('Single', 'Double', 'Deluxe', 'Suite')),
+    RoomType VARCHAR(50) PRIMARY KEY CHECK (RoomType IN ('Presidential', 'Single', 'Double', 'Deluxe', 'Suite')),
     Cost DECIMAL(10,2) NOT NULL CHECK (Cost > 0),
     RoomCapacity INTEGER NOT NULL CHECK (RoomCapacity > 0)
 );

@@ -7,7 +7,7 @@ A complete backend system for managing hotel operations, including customer book
 ## 📑 Entity-Relationship Model
 
 ### 🏷️ RoomType
-- `RoomType` (PK) (Single, Double, Deluxe, Suite)
+- `RoomType` (PK) (Presidential, Single, Double, Deluxe, Suite)
 - `Cost`
 - `RoomCapacity`
 
@@ -15,6 +15,13 @@ A complete backend system for managing hotel operations, including customer book
 - `RoomID` (PK)
 - `RoomType` (FK to RoomType)
 - `Status` (Available / Occupied / Maintenance)
+
+Room Distribution per Floor (9 floors, 100 rooms each):
+- Room X00: Presidential Suite (1 room)
+- Rooms X01-X10: Suite (10 rooms)
+- Rooms X11-X20: Deluxe (10 rooms)
+- Rooms X21-X40: Single (20 rooms)
+- Rooms X41-X99: Double (59 rooms)
 
 ### 🧍 Customer
 - `CustomerID` (PK)
@@ -44,7 +51,7 @@ A complete backend system for managing hotel operations, including customer book
 - `CheckOutDate`
 - `BookingDate`
 - `NumberOfGuests`
-- `Status`
+- `Status` (Confirmed, Checked-In, Checked-Out, Cancelled, No-Show)
 
 ### 💳 Payment
 - `PaymentID` (PK)
@@ -52,7 +59,7 @@ A complete backend system for managing hotel operations, including customer book
 - `Amount`
 - `PaymentDate`
 - `PaymentMethod` (Cash, Card, UPI, Online)
-- `Status`
+- `Status` (Success, Failed, Pending)
 
 ---
 
@@ -69,8 +76,9 @@ A complete backend system for managing hotel operations, including customer book
 
 - Manage customers, rooms, and staff.
 - Handle room bookings and payments.
-- Track room types with capacity and pricing.
+- Track room types with capacity and pricing including Presidential suites.
 - Maintain staff information and roles.
+- Support for 900 rooms across 9 floors with varied room types.
 
 ---
 

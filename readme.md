@@ -4,7 +4,7 @@ A PostgreSQL-based database management system for hotel operations.
 
 ## 🗃️ Database Schema
 
-The database consists of 5 main tables:
+The database consists of 5 main tables with 6 room types including Presidential suites:
 
 ### Tables and Columns
 
@@ -16,6 +16,13 @@ The database consists of 5 main tables:
 | **Staff** | ***StaffID*** (PK), FullName, Role, Phone, Email, Salary, Gender, JoiningDate |
 | **Booking** | ***BookingID*** (PK), CustomerID (FK), RoomID (FK), CheckInDate, CheckOutDate, BookingDate, NumberOfGuests, Status |
 | **Payment** | ***PaymentID*** (PK), BookingID (FK), Amount, PaymentDate, PaymentMethod, Status |
+
+### Room Types
+- **Presidential**: Luxury presidential suite (6 guests, ₹10,000/night)
+- **Suite**: Premium suite (4 guests, ₹6,000/night)
+- **Deluxe**: Deluxe room (3 guests, ₹4,000/night)
+- **Double**: Double occupancy (2 guests, ₹2,500/night)
+- **Single**: Single occupancy (1 guest, ₹1,500/night)
 
 ### Relationships
 ```
